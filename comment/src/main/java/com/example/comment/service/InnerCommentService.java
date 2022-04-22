@@ -7,6 +7,7 @@ import javax.transaction.Transactional.TxType;
 
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +23,10 @@ public class InnerCommentService {
 		}
 		// putting to comment deep inside somewhere over the rainbow
 		System.out.println("Im successfull");
+	}
+	
+	@Recover
+	public void putCommentToElasticOrCache(int productId) {
+		System.out.println("Comment is in cache");
 	}
 }
